@@ -29,7 +29,7 @@ const CountingStarsGame: React.FC<CountingStarsGameProps> = ({ onBack }) => {
   const loadProgress = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/games/progress', {
+      const res = await axios.get('https://brainboost-16cb.onrender.com/api/games/progress', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const progress = res.data.gameProgress.find((p: any) => p.gameId === 'counting-stars');
@@ -45,7 +45,7 @@ const CountingStarsGame: React.FC<CountingStarsGameProps> = ({ onBack }) => {
   const saveProgress = async (currentLevel: number) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/games/progress', 
+      await axios.post('https://brainboost-16cb.onrender.com/api/games/progress', 
         { gameId: 'counting-stars', level: currentLevel, score: currentLevel * 10 },
         { headers: { Authorization: `Bearer ${token}` }}
       );

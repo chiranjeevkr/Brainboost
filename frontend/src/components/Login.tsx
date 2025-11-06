@@ -18,7 +18,7 @@ const Login: React.FC<LoginProps> = ({ setAuth, setMode }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post('https://brainboost-16cb.onrender.com/api/auth/login', formData);
       
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
