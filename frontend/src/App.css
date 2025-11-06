@@ -519,6 +519,148 @@ body {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
+/* Pattern Creator Game Styles */
+.creativity-game {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.level-selector {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.level-btn {
+  padding: 10px 15px;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.level-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: white;
+}
+
+.level-btn.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.level-btn:hover:not(.locked) {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+.pattern-grid {
+  display: grid;
+  gap: 10px;
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 30px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+}
+
+.pattern-cell {
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  transition: all 0.3s;
+  min-height: 70px;
+}
+
+.pattern-cell.active {
+  background: rgba(255,215,0,0.3);
+  border-color: gold;
+}
+
+.pattern-cell.clickable {
+  cursor: pointer;
+}
+
+.pattern-cell.clickable:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+.game-instructions {
+  margin: 30px 0;
+  padding: 30px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+}
+
+.success-message {
+  margin-top: 30px;
+  padding: 30px;
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid #4CAF50;
+  border-radius: 15px;
+}
+
+.success-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.retry-btn, .next-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.retry-btn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.retry-btn:hover, .next-btn:hover {
+  transform: scale(1.05);
+}
+
+.game-tips {
+  margin-top: 40px;
+  padding: 25px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  text-align: left;
+}
+
+.game-tips h4 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.game-tips ul {
+  list-style-position: inside;
+  line-height: 1.8;
+}
+
 /* Color Match Game Styles */
 .color-match-game {
   text-align: center;
@@ -629,6 +771,75 @@ body {
   border-radius: 15px;
 }
 
+/* Kid Memory Game */
+.kid-memory-game {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.animal-sequence {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+  padding: 30px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+}
+
+.animal-item {
+  font-size: 80px;
+  animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.user-sequence {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+  min-height: 80px;
+  align-items: center;
+}
+
+.selected-animal {
+  font-size: 60px;
+}
+
+.animal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 500px;
+  margin: 30px auto;
+}
+
+.animal-btn {
+  padding: 20px;
+  font-size: 60px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.animal-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.3);
+}
+
+.animal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Counting Stars Game */
 .stars-display {
   display: flex;
@@ -699,74 +910,4 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-
-/* Kid Memory Game Styles */
-.kid-memory-game {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.animal-sequence {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 30px 0;
-  padding: 30px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 15px;
-}
-
-.animal-item {
-  font-size: 80px;
-  animation: bounce 0.5s ease;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.user-sequence {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin: 20px 0;
-  min-height: 80px;
-  align-items: center;
-}
-
-.selected-animal {
-  font-size: 60px;
-}
-
-.animal-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 500px;
-  margin: 30px auto;
-}
-
-.animal-btn {
-  padding: 20px;
-  font-size: 60px;
-  border: none;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.animal-btn:hover:not(:disabled) {
-  transform: scale(1.1);
-  background: rgba(255,255,255,0.3);
-}
-
-.animal-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
