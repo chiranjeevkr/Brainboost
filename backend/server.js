@@ -8,8 +8,15 @@ const gameRoutes = require('./routes/games');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true
+}));
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.json({ message: 'BrainBoost API is running' });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/games', gameRoutes);
