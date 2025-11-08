@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const axios = require('axios');
 const router = express.Router();
 
 // Get user progress
@@ -59,15 +60,17 @@ router.post('/puzzle', auth, async (req, res) => {
 
     const prompt = prompts[difficulty] || prompts.easy;
     
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
+      {
         contents: [{ parts: [{ text: prompt }] }]
-      })
-    });
+      },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
 
-    const data = await response.json();
+    const data = response.data;
     const aiText = data.candidates[0].content.parts[0].text;
     
     const jsonMatch = aiText.match(/\{[^}]+\}/);
