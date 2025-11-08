@@ -18,7 +18,7 @@ const PuzzleGenerator: React.FC = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/games/puzzle',
+      const response = await axios.post('https://brainboost-16cb.onrender.com/api/games/puzzle',
         { difficulty },
         { headers: { Authorization: `Bearer ${token}` } }
       );
