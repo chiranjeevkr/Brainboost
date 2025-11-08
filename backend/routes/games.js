@@ -81,8 +81,12 @@ router.post('/puzzle', auth, async (req, res) => {
       res.json({ question: aiText.split('Answer:')[0].trim(), answer: aiText.split('Answer:')[1]?.trim() || 'Check solution' });
     }
   } catch (error) {
-    console.error('AI Puzzle Error:', error);
-    res.json({ question: "What comes next: 2, 4, 6, ?", answer: "8" });
+    console.error('AI Puzzle Error:', error.message);
+    console.error('Error details:', error.response?.data || error);
+    res.json({ 
+      question: "What comes next in the sequence: 2, 4, 6, 8, ?", 
+      answer: "10" 
+    });
   }
 });
 

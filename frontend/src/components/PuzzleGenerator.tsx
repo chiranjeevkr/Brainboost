@@ -18,16 +18,20 @@ const PuzzleGenerator: React.FC = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
+      console.log('Generating puzzle with difficulty:', difficulty);
+      
       const response = await axios.post('https://brainboost-16cb.onrender.com/api/games/puzzle',
         { difficulty },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
+      console.log('Puzzle response:', response.data);
       setPuzzle(response.data);
       setUserAnswer('');
       setShowAnswer(false);
-    } catch (error) {
-      console.error('Failed to generate puzzle');
+    } catch (error: any) {
+      console.error('Failed to generate puzzle:', error);
+      alert('Failed to generate puzzle. Error: ' + (error.response?.data?.message || error.message));
     } finally {
       setLoading(false);
     }
