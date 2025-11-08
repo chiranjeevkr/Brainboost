@@ -26,12 +26,16 @@ const Progress: React.FC = () => {
   const fetchProgress = async () => {
     try {
       const token = localStorage.getItem('token');
+      console.log('Fetching progress with token:', token ? 'exists' : 'missing');
       const response = await axios.get('https://brainboost-16cb.onrender.com/api/games/progress', {
         headers: { Authorization: `Bearer ${token}` }
       });
+      console.log('Progress response:', response.data);
       setProgress(response.data);
-    } catch (error) {
-      console.error('Failed to fetch progress');
+    } catch (error: any) {
+      console.error('Failed to fetch progress:', error);
+      console.error('Error response:', error.response?.data);
+      console.error('Error status:', error.response?.status);
     }
   };
 
