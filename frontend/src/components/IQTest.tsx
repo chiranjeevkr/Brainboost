@@ -74,7 +74,7 @@ const IQTest: React.FC = () => {
     // Save IQ score to backend
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/games/iq', 
+      await axios.post('https://brainboost-16cb.onrender.com/api/games/iq', 
         { score: calculatedIQ },
         { headers: { Authorization: `Bearer ${token}` } }
       );

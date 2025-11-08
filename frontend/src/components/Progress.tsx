@@ -26,7 +26,7 @@ const Progress: React.FC = () => {
   const fetchProgress = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/games/progress', {
+      const response = await axios.get('https://brainboost-16cb.onrender.com/api/games/progress', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProgress(response.data);
