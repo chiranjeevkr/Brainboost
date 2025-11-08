@@ -41,33 +41,45 @@ router.post('/progress', auth, async (req, res) => {
   }
 });
 
-// Generate AI puzzle
+// Generate AI puzzle using Gemini
 router.post('/puzzle', auth, async (req, res) => {
   try {
     const { difficulty } = req.body;
     
-    // Simple puzzle generation (in real app, use AI API)
-    const puzzles = {
-      easy: [
-        { question: "What comes next: 2, 4, 6, ?", answer: "8" },
-        { question: "If you have 3 apples and eat 1, how many are left?", answer: "2" }
-      ],
-      medium: [
-        { question: "What comes next: 1, 1, 2, 3, 5, ?", answer: "8" },
-        { question: "A man is 4 times as old as his son. In 20 years, he will be twice as old. How old is the son now?", answer: "10" }
-      ],
-      hard: [
-        { question: "What comes next: 2, 6, 12, 20, 30, ?", answer: "42" },
-        { question: "You have 12 balls, one is heavier. Using a balance scale 3 times, how do you find it?", answer: "Divide into groups of 4" }
-      ]
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ message: 'AI API key not configured' });
+    }
+
+    const prompts = {
+      easy: 'Generate a simple brain teaser or logic puzzle suitable for beginners. Include the question and answer in JSON format: {"question": "...", "answer": "..."}',
+      medium: 'Generate a moderate difficulty brain teaser, logic puzzle, or math problem. Include the question and answer in JSON format: {"question": "...", "answer": "..."}',
+      hard: 'Generate a challenging brain teaser, complex logic puzzle, or advanced math problem. Include the question and answer in JSON format: {"question": "...", "answer": "..."}'
     };
+
+    const prompt = prompts[difficulty] || prompts.easy;
     
-    const puzzleSet = puzzles[difficulty] || puzzles.easy;
-    const puzzle = puzzleSet[Math.floor(Math.random() * puzzleSet.length)];
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+
+    const data = await response.json();
+    const aiText = data.candidates[0].content.parts[0].text;
     
-    res.json(puzzle);
+    const jsonMatch = aiText.match(/\{[^}]+\}/);
+    if (jsonMatch) {
+      const puzzle = JSON.parse(jsonMatch[0]);
+      res.json(puzzle);
+    } else {
+      res.json({ question: aiText.split('Answer:')[0].trim(), answer: aiText.split('Answer:')[1]?.trim() || 'Check solution' });
+    }
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('AI Puzzle Error:', error);
+    res.json({ question: "What comes next: 2, 4, 6, ?", answer: "8" });
   }
 });
 
