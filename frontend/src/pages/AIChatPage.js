@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
+import axios from 'axios';
 
 const AIChatPage = () => {
   const [messages, setMessages] = useState([
@@ -16,53 +17,17 @@ const AIChatPage = () => {
     setInput('');
     setLoading(true);
 
-    // Simple AI responses (you can integrate with OpenAI API later)
-    const response = generateResponse(input);
-    
-    setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-      setLoading(false);
-    }, 1000);
-  };
-
-  const generateResponse = (question) => {
-    const q = question.toLowerCase();
-    
-    if (q.includes('hello') || q.includes('hi')) {
-      return 'Hello! 👋 How can I help you today?';
-    } else if (q.includes('math') || q.includes('calculate') || q.includes('+') || q.includes('-') || q.includes('*') || q.includes('/')) {
-      try {
-        const match = q.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
-        if (match) {
-          const num1 = parseInt(match[1]);
-          const op = match[2];
-          const num2 = parseInt(match[3]);
-          let result;
-          if (op === '+') result = num1 + num2;
-          else if (op === '-') result = num1 - num2;
-          else if (op === '*') result = num1 * num2;
-          else if (op === '/') result = num1 / num2;
-          return `The answer is ${result}! 🧮`;
-        }
-      } catch (e) {}
-      return 'I can help with math! Try asking like "What is 5 + 3?" 🧮';
-    } else if (q.includes('game') || q.includes('play')) {
-      return 'You can play amazing brain games! Click on "Play Memory Games" from your dashboard! 🎮';
-    } else if (q.includes('score') || q.includes('performance')) {
-      return 'Check your leaderboard to see your scores and progress! 🏆';
-    } else if (q.includes('help')) {
-      return 'I can help you with:\n• Math problems 🧮\n• Fun facts 🌟\n• Game tips 🎮\n• General questions 💡\nJust ask me anything!';
-    } else if (q.includes('fact')) {
-      const facts = [
-        'Did you know? Your brain has about 86 billion neurons! 🧠',
-        'Fun fact: Playing memory games can improve your brain power! 💪',
-        'Amazing! Your brain uses 20% of your body\'s energy! ⚡',
-        'Cool fact: You can\'t tickle yourself because your brain predicts it! 😄'
-      ];
-      return facts[Math.floor(Math.random() * facts.length)];
-    } else {
-      return 'That\'s an interesting question! I\'m still learning. Try asking me about math, games, or say "help" to see what I can do! 🤖';
+    try {
+      const response = await axios.post('/api/ai/chat', { message: input });
+      setMessages(prev => [...prev, { role: 'assistant', content: response.data.response }]);
+    } catch (error) {
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: 'Sorry, I\'m having trouble right now. Please try again! 😊' 
+      }]);
     }
+    
+    setLoading(false);
   };
 
   return (

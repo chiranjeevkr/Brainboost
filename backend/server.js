@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const childrenRoutes = require('./routes/children');
 const gameScoresRoutes = require('./routes/gameScores');
+const aiChatRoutes = require('./routes/aiChat');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/children', childrenRoutes);
 app.use('/api/game-scores', gameScoresRoutes);
+app.use('/api/ai', aiChatRoutes);
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)

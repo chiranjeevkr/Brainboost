@@ -9,6 +9,11 @@ A MERN stack web application designed to help people and children boost their me
 - **Authentication**: Login system for General, Parent, and Kids accounts
 - **User Profiles**: Editable profile with name, gender, age, email, phone number
 - **Password Management**: Change password functionality
+- **Child Management**: Parents can create, edit, pause, and delete child accounts
+- **Memory Games**: 4 brain-boosting games (Math Quiz, Number Sequence, Color Pattern, Word Memory)
+- **Leaderboard**: Track game scores and performance
+- **Parent Dashboard**: View child's game performance and progress
+- **AI Chat Assistant**: Age-appropriate AI chatbot powered by OpenAI for children
 - **Responsive Design**: Works on desktop and mobile devices
 
 ## Tech Stack
@@ -37,12 +42,19 @@ A MERN stack web application designed to help people and children boost their me
    npm install
    ```
 
-3. Create `.env` file with your MongoDB connection string:
+3. Create `.env` file with your MongoDB connection string and OpenAI API key:
    ```
    MONGODB_URI=mongodb://localhost:27017/brainboost
    JWT_SECRET=your_jwt_secret_key_here
    PORT=5000
+   OPENAI_API_KEY=your_openai_api_key_here
    ```
+
+   To get OpenAI API key:
+   - Go to https://platform.openai.com/api-keys
+   - Sign up or login
+   - Create a new API key
+   - Copy and paste it in the .env file
 
 4. Start the backend server:
    ```bash
