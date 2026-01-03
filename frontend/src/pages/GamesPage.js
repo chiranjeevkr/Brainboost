@@ -4,6 +4,7 @@ import MathQuizGame from '../games/MathQuizGame';
 import NumberSequenceGame from '../games/NumberSequenceGame';
 import ColorPatternGame from '../games/ColorPatternGame';
 import WordMemoryGame from '../games/WordMemoryGame';
+import SudokuGame from '../games/SudokuGame';
 
 const GamesPage = () => {
   const [selectedGame, setSelectedGame] = useState(null);
@@ -12,7 +13,8 @@ const GamesPage = () => {
     { id: 1, name: 'Math Quiz', icon: '🧮', component: <MathQuizGame />, color: '#667eea' },
     { id: 2, name: 'Number Sequence', icon: '🔢', component: <NumberSequenceGame />, color: '#11998e' },
     { id: 3, name: 'Color Pattern', icon: '🎨', component: <ColorPatternGame />, color: '#f093fb' },
-    { id: 4, name: 'Word Memory', icon: '📝', component: <WordMemoryGame />, color: '#FF6B6B' }
+    { id: 4, name: 'Word Memory', icon: '📝', component: <WordMemoryGame />, color: '#FF6B6B' },
+    { id: 5, name: 'Sudoku', icon: '🔢', component: <SudokuGame />, color: '#3498db' }
   ];
 
   return (

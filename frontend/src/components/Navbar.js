@@ -37,7 +37,7 @@ const Navbar = () => {
           borderRadius: '20px',
           background: 'rgba(255, 255, 255, 0.1)'
         }}>
-          👤 Profile
+          🏠 Profile
         </Link>
         {user?.userType === 'parent' && (
           <Link to="/children" style={{ 
@@ -50,6 +50,19 @@ const Navbar = () => {
             background: 'rgba(255, 255, 255, 0.1)'
           }}>
             👶 Children
+          </Link>
+        )}
+        {user?.userType === 'child' && (
+          <Link to="/games" style={{ 
+            color: 'white', 
+            textDecoration: 'none',
+            fontSize: '1.1rem',
+            fontWeight: '500',
+            padding: '8px 16px',
+            borderRadius: '20px',
+            background: 'rgba(255, 255, 255, 0.1)'
+          }}>
+            🎮 Play Games
           </Link>
         )}
         {user?.userType === 'child' && (

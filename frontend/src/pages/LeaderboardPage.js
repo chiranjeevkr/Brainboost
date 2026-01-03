@@ -24,7 +24,8 @@ const LeaderboardPage = () => {
     'Math Quiz': '🧮',
     'Number Sequence': '🔢',
     'Color Pattern': '🎨',
-    'Word Memory': '📝'
+    'Word Memory': '📝',
+    'Sudoku': '🔢'
   };
 
   return (
